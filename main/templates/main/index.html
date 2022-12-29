@@ -1,0 +1,52 @@
+{% extends 'main/base.html' %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+
+{% if request.user.is_authenticated %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-8"></div>
+            <div class="col text-center">
+                <a class="btn btn-success" href="admin"> Редактировать записи</a>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<div class="lead text-center">
+    <table class="table">
+        <tbody>
+            {% for item in quotes %}
+             <tr>
+                 <td>{{ item.author }}</td>
+                 <td>{{ item.content }}</td>
+             </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+{% block paginator %}
+<div class="container">
+    <nav id="pagination">
+        <ul class="pagination">
+          {% if pag_items.previous_page %}
+            <li class="page-item"><a class="page-link" href="?search={{search_item}}&page={{pag_items.previous_page}}">Назад</a></li>
+          {% endif %}
+          {% for page in pag_items.pages %}
+            {% if page is pag_items.current_page %}
+                <li class="page-item active"><a class="page-link" href="?search={{search_item}}&page={{page}}">{{page}}</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?search={{search_item}}&page={{page}}">{{page}}</a></li>
+            {% endif %}
+          {% endfor %}
+          {% if pag_items.next_page %}
+            <li class="page-item"><a class="page-link" href="?page={{pag_items.next_page}}">Далее</a></li>
+          {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-6 mx-auto">
+            <div class="container my-4 ">
+                <h2 class="fw-bold mb-0">Вход</h2>
+            </div>
+
+            <div class="text-center">
+                {% for error in login_form.non_field_errors %}
+                    <span class="text-danger">{{ error }}</span>
+                {% endfor %}
+                <form method="post" class="">
+                        {% csrf_token %}
+                        {{login_form.username}}
+                        {{login_form.password}}
+                    <button class="w-50 btn btn-lg rounded-3 btn-primary" type="submit">Войти</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

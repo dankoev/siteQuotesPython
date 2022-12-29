@@ -1,0 +1,68 @@
+{% extends 'admininterface/base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+
+{% block body %}
+    <h1> Создание цитаты </h1>
+
+    {% for message in messages %}
+        <div class="alert alert-warning">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <datalist id="keywords">
+        {% for item in keyword_model %}
+            <option value="{{ item.keyword }}">
+        {% endfor %}
+    </datalist>
+
+    <form method="POST" id="Delete">
+        {% csrf_token %}
+        {% for item in keywords_list %}
+            <input type="text" name="keywords_list" value="{{item}}" hidden/>
+        {% endfor %}
+    </form>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ keyword_form.keyword }}
+        <br/>
+        <button class="btn btn-secondary" type="submit">Добавить ключевое слово</button>
+        <br/>
+        <label class="blockquote text-center">Добавленные ключевые слова:</label>
+        <br/>
+        <ul class="list-unstyled">
+            {% for item in keywords_list %}
+            <li class="list-inline-item">
+                <input class="alert alert-info" type="text" size="2" name="keywords_list" value="{{item}}" readonly/>
+                <button type="submit" name="Delete" value="{{item}}" form="Delete">Удалить</button>
+            </li>
+            {% endfor %}
+        </ul>
+    </form>
+
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            {% for item in keywords_list %}
+                    <input type="text" name="keywords_list" value="{{item}}" hidden/>
+            {% endfor %}
+        </div>
+        <div>
+            {{ quote_form.author }}<br>
+            {{ quote_form.content }}
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-success ">Создать</button>
+        </div>
+    </form>
+    <div class="my-2 text-center">
+        <a   href="{% url 'admin' %} " class="btn btn-primary btn-sm">Назад</a>
+    </div>
+{% endblock %}
+
+

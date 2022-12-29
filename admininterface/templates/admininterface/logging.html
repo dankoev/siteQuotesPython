@@ -1,0 +1,29 @@
+{% extends 'admininterface/base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+    <div class="d-flex flex-row-reverse">
+        <a   href="{% url 'admin' %} " class="btn btn-primary btn-sm">Назад</a>
+    </div>
+    <div class=" text-center">
+        <table class="table">
+            <thead class="thread-dark">
+                <tr>
+                    <th>Время</th>
+                    <th>Действие пользователя</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in logging_info %}
+                 <tr>
+                     <td>{{ item.time }}</td>
+                     <td>{{ item.action }}</td>
+                 </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
