@@ -20,6 +20,7 @@
             </tbody>
         </table>
     </div>
+
     <div class="container">
         <nav id="pagination">
             <ul class="pagination">
@@ -34,7 +35,7 @@
                 {% endif %}
               {% endfor %}
               {% if pag_items.next_page %}
-                <li class="page-item"><a class="page-link" href="?page={{pag_items.next_page}}">Далее</a></li>
+                <li class="page-item"><a class="page-link" href="?search={{search_item}}&page={{pag_items.next_page}}">Далее</a></li>
               {% endif %}
             </ul>
         </nav>

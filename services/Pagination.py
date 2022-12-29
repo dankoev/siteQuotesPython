@@ -18,10 +18,10 @@ class Paginator:
 
     def count_pages(self, split_number):
         if not self.model_filter:
-            count_quotes = self.model.objects.count()
+            number_quotes = self.model.objects.count()
         else:
-            count_quotes = self.model.objects.filter(keys__keyword=self.model_filter).count()
-        pages = math.ceil(count_quotes / split_number)
+            number_quotes = self.model.objects.filter(keys__keyword=self.model_filter).count()
+        pages = math.ceil(number_quotes / split_number)
         print('pag_pages:', pages)
         self.number_pages = pages
 
@@ -31,7 +31,10 @@ class Paginator:
             current_page = int(current_page)
             if current_page == 1:
                 previous_page = None
-                next_page = 2
+                if current_page == self.number_pages:
+                    next_page = None
+                else:
+                    next_page = 2
             elif current_page == self.number_pages:
                 previous_page = self.number_pages - 1
                 next_page = None
@@ -41,7 +44,10 @@ class Paginator:
         else:
             current_page = 1
             previous_page = None
-            next_page = 2
+            if current_page == self.number_pages:
+                next_page = None
+            else:
+                next_page = 2
         if not self.model_filter:
             page_objs = self.model.objects.all()[sp_n * (current_page - 1):sp_n * current_page]
         else:
@@ -52,6 +58,5 @@ class Paginator:
             'current_page': current_page,
             'next_page': next_page,
             'previous_page': previous_page,
-
         }
         return items

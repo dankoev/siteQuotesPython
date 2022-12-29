@@ -25,6 +25,8 @@ def index(request):
 @login_required(login_url='login')
 def create(request):
     keywords_list = []
+    quote_form = QuotesForm()
+    keyword_form = KeysWordsForm()
     if request.method == 'POST':
         keyword_form = KeysWordsForm(request.POST)
         quote_form = QuotesForm(request.POST)
@@ -43,13 +45,9 @@ def create(request):
                     create_quote(keywords_list, quote_form)
                     print('quote created')
                     return redirect('admin')
-    keyword_model = KeysWords.objects.all()
-    keyword_form = KeysWordsForm()
-    quote_form = QuotesForm(request.POST)
     context = {
         'title': 'Создание цитаты',
         'quote_form': quote_form,
-        'keyword_model': keyword_model,
         'keyword_form': keyword_form,
         'keywords_list': keywords_list,
     }
@@ -139,12 +137,10 @@ def edit(request):
                     edit_quote(keywords_list, quote_form, quote_id)
                     print('quote created')
                     return redirect('admin')
-    keyword_model = KeysWords.objects.all()
     quote_form = QuotesForm(instance=quote)
     context = {
         'title': 'Создание цитаты',
         'quote_form': quote_form,
-        'keyword_model': keyword_model,
         'keyword_form': keyword_form,
         'keywords_list': keywords_list,
     }

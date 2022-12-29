@@ -72,6 +72,7 @@ def search_result(request):
     find_quotes = pag_items['page_objs']
     print(search)
     print(find_quotes)
+    print(pag_items)
     context = {
         'title': 'Результаты поиска',
         'quotes': find_quotes,
