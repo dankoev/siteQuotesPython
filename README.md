@@ -13,9 +13,17 @@ Use `git clone https://github.com/Anigirka/siteQuotesPython.git`
 
 `cd .\siteQuotesPython\` to go to a directory with `manage.py` 
 ```
+python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
 <p>That's all it takes to start the server</p>
 <p>You can open the site from the link  http://127.0.0.1:8000/</p>
+<p> To enter the admin page enter</p>
+
+```
+login: admin
+password: siteqoutes
+```
+
 
